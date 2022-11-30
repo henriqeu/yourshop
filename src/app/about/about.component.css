@@ -1,0 +1,14 @@
+/* Add application styles & imports to this file! */
+@import url('https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css');
+
+.red-border-class{
+  border:1px solid red;
+  color:red;
+}
+
+
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+
+

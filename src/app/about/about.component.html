@@ -1,0 +1,74 @@
+<div class="col-sm-6">
+  <span> Locality</span>
+  <select [(ngModel)]="selectedLocality" (ngModelChange)="getDataByID()">
+    <option value="0" disabled>Select Locality</option>
+    <option *ngFor="let item of localityList" [value]="item.id">
+      {{ item.id }}
+    </option>
+  </select>
+
+  <input type="text" name="nome" id="nome" [(ngModel)]="nome">
+
+  <a (ngModelChange)="getDataByID()"> DFASDASDASDASDASDAS {{selectedLocality}} </a>
+
+  <br><br><br>
+
+  <table class="table responsive">
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">ENDUSER</th>
+      <th scope="col">SITE</th>
+      <th scope="col">FLOOR</th>
+      <th scope="col">ROOM</th>
+    </tr>
+
+    <tr *ngFor="let loc of localityList; let indexOfelement = index">
+      <td>{{ loc.id }}</td>
+      <td>{{ loc.enduser }}</td>
+      <td>{{ loc.site }}</td>
+      <td>{{ loc.floor }}</td>
+      <td>{{ loc.room }}</td>
+    </tr>
+
+  </table>
+
+
+
+  <form [formGroup]="LocalityForm">
+
+
+    <label>ENDUSER</label> <br>
+    <input
+    formControlName="enduser"
+    id="enduser"
+    name="enduser" type="text" ><br>
+
+    <label>ID</label> <br>
+    <input
+    readonly
+    formControlName="id"
+    name="id"
+    id="id"
+    type="number" ><br>
+
+    <label>SITE</label> <br>
+    <input formControlName="site" type="text" > <br>
+
+    <label>FLOOR</label> <br>
+    <input formControlName="floor" type="text" > <br>
+
+    <label>ROOM</label> <br>
+    <input formControlName="room" type="text" > <br>
+
+
+
+    <br>
+    <button type="submit" (click)="addData()"> Enviar</button>
+  </form>
+  <button class="btn-danger" (click)="getAllData()">
+    Listar todas localidades
+  </button>
+</div>
+
+<pre> You select ID <strong>{{ selectedLocality }}</strong> </pre>
+<pre>  {{ localityList | json }}</pre>
