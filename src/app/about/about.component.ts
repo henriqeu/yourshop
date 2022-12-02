@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Locality, LocalityInterface } from 'src/util/locality';
+import { LocalityInterface } from 'src/util/locality';
 import { AboutService } from './service/about.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-about',
@@ -11,70 +9,76 @@ import { Observable } from 'rxjs';
   styleUrls: ['./about.component.css'],
 })
 export class AboutComponent implements OnInit {
-  //Select ID
-  selectedLocality!: number;
-  nome!: any;
-
-  //Object
+  localityID!: string;
+  updateLocality!: LocalityInterface;
   locality = {} as LocalityInterface;
-
-  //Lista
-  localityList!: LocalityInterface[];
-
-  //Form
-  LocalityForm!: FormGroup;
+  searchLocalitys!: LocalityInterface[];
+  customInterface: LocalityInterface = {
+    id: '',
+    enduser: '',
+    site: '',
+    floor: '',
+    room: '',
+  };
 
   constructor(
-    public FormBuilder: FormBuilder,
-    private localityService: AboutService
-  ) {}
+    private localityService: AboutService,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit() {
-    this.LocalityForm = this.FormBuilder.group({
-      id: [''],
-      enduser: [''],
-      site: [''],
-      floor: [''],
-      room: [''],
-    });
-
-    //this.id =  this.route.snapshot.params['id'];
-    // Lista de localidades
-    this.getAllData();
+    this.getAllLocalitys();
   }
 
-  addData() {
-    this.localityService.postLocality(this.locality).subscribe((data) => {
-      //console.log(data);
-      window.location.reload();
+  // Todas localidades na lista
+  getAllLocalitys() {
+    this.localityService.getAllLocalitys().subscribe((localitys) => {
+      //console.log(localitys);
+      this.searchLocalitys = localitys;
     });
   }
 
-  getAllData() {
-    this.localityService.getAllLocalitys().subscribe((dataReceive) => {
-      this.localityList = dataReceive;
-      //console.log(this.localityList);
-    });
+  //Select no item da lista por ID
+  onSelectedLocality(selectedID: any) {
+    this.localityService.getLocalityById(selectedID).subscribe((locality) => {
+      console.log(locality)
+      this.customInterface.id = locality.id;
+      this.customInterface.enduser = locality.enduser;
+      this.customInterface.room = locality.room;
+      this.customInterface.site = locality.site;
+      this.customInterface.floor = locality.floor;
+    })
   }
 
-    animal = {
-      enduser: 1 ,
-      id: 2
+  //Limpar Campos
+  clearLocality(customInterface: LocalityInterface) {
+    this.customInterface = {
+      enduser: '',
+      site: '',
+      floor: '',
+      id: '',
+      room: '',
+    };
+
+    this.locality = {
+      enduser: '',
+      site: '',
+      floor: '',
+      id: '',
+      room: '',
+    };
+  }
+
+  postLocality() {
+    console.log(this.customInterface)
+    if (this.customInterface.id || "" ) {
+      alert("Atualizou")
+    } else {
+      alert("Salvou")
+       this.localityService.postLocality(this.customInterface).subscribe((data) => {
+       });
     }
 
-  getDataByID(): void {
-    this.localityService.getLocalityById().subscribe((locality:any) => {
 
-      console.log(locality)
-
-
-      this.FormBuilder.group({
-        enduser: [''],
-        id: [''],
-        site: [''],
-        floor: [''],
-        room: [''],
-      });
-    });
   }
 }

@@ -1,74 +1,43 @@
-<div class="col-sm-6">
-  <span> Locality</span>
-  <select [(ngModel)]="selectedLocality" (ngModelChange)="getDataByID()">
-    <option value="0" disabled>Select Locality</option>
-    <option *ngFor="let item of localityList" [value]="item.id">
-      {{ item.id }}
-    </option>
-  </select>
+<div class="custom-alert-container">
+  <div class="search-container">
+    <div class="input-line">
+      <span class="search-title">_Pesquisar Localidades</span>
 
-  <input type="text" name="nome" id="nome" [(ngModel)]="nome">
+      <!-- <select  [(ngModel)]="selectedLocality" (change)="onSelectedLocality(selectedLocality=$event.target.value)" > -->
+      <select [(ngModel)]="locality" (change)="onSelectedLocality(locality)">
+        <option disabled>_Selecione</option>
+        <option *ngFor="let locality of searchLocalitys" [value]="locality.id">
+          {{locality.id}} </option>
+      </select>
+    </div>
 
-  <a (ngModelChange)="getDataByID()"> DFASDASDASDASDASDAS {{selectedLocality}} </a>
+    <form>
 
-  <br><br><br>
+      <div class="input-line">
+        <span> _RESPONSÁVEL</span>
+        <input  name="enduser"  type="number" [(ngModel)]="customInterface.enduser">
+      </div>
 
-  <table class="table responsive">
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">ENDUSER</th>
-      <th scope="col">SITE</th>
-      <th scope="col">FLOOR</th>
-      <th scope="col">ROOM</th>
-    </tr>
+      <div class="input-line">
+        <span> _SITE</span>
+        <input id="site" name="site" type="text" [(ngModel)]="customInterface.site">
+      </div>
 
-    <tr *ngFor="let loc of localityList; let indexOfelement = index">
-      <td>{{ loc.id }}</td>
-      <td>{{ loc.enduser }}</td>
-      <td>{{ loc.site }}</td>
-      <td>{{ loc.floor }}</td>
-      <td>{{ loc.room }}</td>
-    </tr>
+      <div class="input-line">
+        <span> _ROOM</span>
+        <input id="room" name="room" type="number" [(ngModel)]="customInterface.room">
+      </div>
 
-  </table>
+      <div class="input-line">
+        <span> _FLOOR</span>
+        <input id="floor" name="floor" type="number" [(ngModel)]="customInterface.floor">
+      </div>
 
+      <form class="button-container">
+        <button class="button" (click)="clearLocality(customInterface)">_Limpar Campos</button>
+        <button class="button" (click)="postLocality()">_Salvar</button>
+      </form>
 
-
-  <form [formGroup]="LocalityForm">
-
-
-    <label>ENDUSER</label> <br>
-    <input
-    formControlName="enduser"
-    id="enduser"
-    name="enduser" type="text" ><br>
-
-    <label>ID</label> <br>
-    <input
-    readonly
-    formControlName="id"
-    name="id"
-    id="id"
-    type="number" ><br>
-
-    <label>SITE</label> <br>
-    <input formControlName="site" type="text" > <br>
-
-    <label>FLOOR</label> <br>
-    <input formControlName="floor" type="text" > <br>
-
-    <label>ROOM</label> <br>
-    <input formControlName="room" type="text" > <br>
-
-
-
-    <br>
-    <button type="submit" (click)="addData()"> Enviar</button>
-  </form>
-  <button class="btn-danger" (click)="getAllData()">
-    Listar todas localidades
-  </button>
-</div>
-
-<pre> You select ID <strong>{{ selectedLocality }}</strong> </pre>
-<pre>  {{ localityList | json }}</pre>
+      <pre>  {{ customInterface | json }} </pre>
+      <pre>  {{ locality | json }} </pre>
+      <pre>  {{ updateLocality | json }} </pre>

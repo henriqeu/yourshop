@@ -1,14 +1,189 @@
 /* Add application styles & imports to this file! */
 @import url('https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css');
 
-.red-border-class{
-  border:1px solid red;
-  color:red;
+.custom-alert-container {
+  height:110%;
+  padding: 2%;
+}
+
+.custom-alert-container .register-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.register-container .input-line {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.input-line > span:first-of-type {
+  width: 50%;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.input-line > span:first-of-type::after {
+  color: var(--gray);
+  content: " . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . "
+}
+
+.input-line > input,
+.input-line > select,
+.dotted-input-container > span:first-of-type {
+  width: 50%;
+}
+
+.register-container .checkbox-input-line {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.checkbox-input-line .checkbox {
+  display: block;
+  width: 16px;
+  height: 16px;
+  border: 1px solid var(--primary-color-1);
+  cursor: pointer;
+  margin-right: 4px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.register-container .nao-inventariado {
+  width: 30%;
+  height: 20px;
+  margin-top: -55px;
+  margin-left: 50%;
+  flex-direction: row;
+}
+
+.register-container .dias-nao-inventariado {
+  display: block;
+  margin-top: -4%;
+  margin-left: 90%;
+}
+
+.inventario-diferente {
+  width: 30%;
+  height: 20px;
+  margin-top: 5px;
+  margin-left: 55%;
+}
+
+.checkbox-input-line .checkbox.checked {
+  background-color: var(--primary-color-1);
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+}
+.hr {
+  color: var(--primary-color-1);
+  background-color: var(--primary-color-1);
+  height: 5px;
+  width: 105%;
+}
+
+.search-container .customAlertCard {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--white-2);
+  background-color: var(--white);
+  padding: 16px;
+  margin-bottom: 8px;
+}
+
+.customAlertCard .label {
+  font-size: 12px;
+  color: var(--gray-5);
+}
+
+.search-container .input-line {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.search-title {
+  display: flex;
+  color: var(--primary-color-1);
+}
+
+.modal{
+  background-color: var(--svg-gear-bg-1);
+  box-shadow: 5px 6px 0px 0px var(--primary-color-2-dark);
+  min-width: 360px;
+  min-height: 150px;
+  position: fixed;
+  left: 50px;
+  padding: 24px;
+  top: 50px;
+  transform: translate(-50%, -50%);
+  z-index: 11;
+  font-size: 1.5rem;
+  text-align:center;
+  padding-top: 50px;
+}
+
+.actions{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  margin-top: 30px;
 }
 
 
-input.ng-invalid.ng-touched {
-  border: 1px solid red;
+/**********************************************************************************/
+
+.modals-box {
+  background-color: var(--svg-gear-bg-1);
+  box-shadow: 5px 5px 7px 7px var(--primary-color-2-dark);
+  min-width: 360px;
+  min-height: 150px;
+  position: fixed;
+  left: 50%;
+  padding: 24px;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 11;
+  font-size: 1.5rem;
+  text-align: center;
+  padding-top: 50px;
+}
+.overlay {
+  background: #000;
+  height: 100vh;
+  left: 0;
+  opacity: 0.5;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: 10;
+}
+.acoes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  margin-top: 30px;
 }
 
+
+  @media screen and (max-width: 548px) {
+  .modals-box {
+      width: 90%;
+      min-width: 90%;
+      padding: 50px 12px 24px;
+      font-size: 1.2rem;
+  }
+}
 
